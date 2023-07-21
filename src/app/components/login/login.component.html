@@ -24,7 +24,13 @@
                 matInput 
                 placeholder="Ex. Pizza">
         </mat-form-field>
-        <button [disabled] = "!validaCampos()" class= "full-width mat-elevation-z4" mat-stroked-button color="primary">Entrar</button>
+        <button 
+            [disabled] = "!validaCampos()" 
+            class= "full-width mat-elevation-z4" 
+            mat-stroked-button color="primary"
+            (click)="logar()">
+                Entrar
+        </button>
     </form>
 </div>
 
