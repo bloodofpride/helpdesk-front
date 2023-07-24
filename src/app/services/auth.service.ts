@@ -5,7 +5,7 @@ import { API_CONFIG } from '../config/api.config';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 const routes = {
-  logar: `/login`
+  logar: `login`
 }
 
 @Injectable({
@@ -18,8 +18,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   authenticate(creds: Credenciais){
-    console.log(`${API_CONFIG.baseUrl}+${routes.logar}`);
-    return this.http.post(`${API_CONFIG.baseUrl}${routes.logar}`, creds, {
+    return this.http.post(`${API_CONFIG.baseUrl}/${routes.logar}`, creds, {
       observe: 'response',
       responseType: 'text'
     });
