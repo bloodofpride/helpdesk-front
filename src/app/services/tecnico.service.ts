@@ -5,7 +5,8 @@ import { Tecnico } from '../models/tecnico';
 import { Observable } from 'rxjs';
 
 const routes = {
-  centralPath: `tecnicos`
+  centralPath: `tecnicos`,
+  pathWithId: (id: number) => `tecnicos/${id}`
 }
 
 @Injectable({
@@ -15,11 +16,19 @@ export class TecnicoService {
 
   constructor(private http: HttpClient) { }
 
+  findById(id: number): Observable<Tecnico>{
+    return this.http.get<Tecnico>(`${API_CONFIG.baseUrl}/${routes.pathWithId(id)}`);
+  }
+
   findAll(): Observable<Tecnico[]>{
     return this.http.get<Tecnico[]>(`${API_CONFIG.baseUrl}/${routes.centralPath}`);
   }
 
   create(tecnico: Tecnico): Observable<Tecnico>{
     return this.http.post<Tecnico>(`${API_CONFIG.baseUrl}/${routes.centralPath}`, tecnico);
+  }
+
+  update(tecnico: Tecnico): Observable<Tecnico>{
+    return this.http.put<Tecnico>(`${API_CONFIG.baseUrl}/${routes.pathWithId(tecnico.id)}`, tecnico);
   }
 }
