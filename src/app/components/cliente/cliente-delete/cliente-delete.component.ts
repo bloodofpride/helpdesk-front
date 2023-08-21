@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Tecnico } from 'src/app/models/tecnico';
-import { TecnicoService } from 'src/app/services/tecnico.service';
+import { Cliente } from 'src/app/models/cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
-  selector: 'app-tecnico-delete',
-  templateUrl: './tecnico-delete.component.html',
-  styleUrls: ['./tecnico-delete.component.css']
+  selector: 'app-cliente-delete',
+  templateUrl: './cliente-delete.component.html',
+  styleUrls: ['./cliente-delete.component.css']
 })
-export class TecnicoDeleteComponent implements OnInit {
+export class ClienteDeleteComponent implements OnInit {
 
-  tecnico: Tecnico = {
+  cliente: Cliente = {
     id:          '',
     nome:        '',
     cpf:         '',
@@ -22,28 +23,28 @@ export class TecnicoDeleteComponent implements OnInit {
   }
 
   constructor(
-    private service: TecnicoService,
+    private service: ClienteService,
     private toast: ToastrService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.tecnico.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.cliente.id = this.activatedRoute.snapshot.paramMap.get('id');
     this.findById();
   }
 
   findById(): void {
-    this.service.findById(this.tecnico.id).subscribe(response => {
+    this.service.findById(this.cliente.id).subscribe(response => {
       response.perfis = [];
-      this.tecnico = response;
+      this.cliente = response;
     })
   }
 
   delete(): void{
-    this.service.delete(this.tecnico.id).subscribe(response => {
-      this.toast.success('Técnico deletado com sucesso', 'Deletado');
-      this.router.navigate(['tecnicos']);
+    this.service.delete(this.cliente.id).subscribe(response => {
+      this.toast.success('Cliente deletado com sucesso', 'Deletado');
+      this.router.navigate(['clientes']);
     }, ex => {
       if(ex.error.errors){
         ex.error.errors.forEach(element => {
