@@ -2,7 +2,7 @@
     <form class="form mat-elevation-z8">
         <h1>Help Desk - Dicas de um Dev</h1>
         <img src="assets/imgs/login-image.svg" alt="Help Desk - Dicas de um Dev">
-        <mat-form-field class="full-width" appearance="fill">
+        <mat-form-field class="full-width" appearance="outline">
             <mat-label>E-mail</mat-label>
             <input
                 [formControl]="email"
@@ -11,9 +11,10 @@
                 name="email" 
                 matInput 
                 placeholder="Ex. Fulano@mail.com">
+                <mat-icon matSuffix>email</mat-icon>
         </mat-form-field>
       
-        <mat-form-field class="full-width" appearance="fill">
+        <mat-form-field class="full-width" appearance="outline">
             <mat-label>Senha</mat-label>
             <input
                 [formControl]="senha"
@@ -23,6 +24,7 @@
                 type="password" 
                 matInput 
                 placeholder="Ex. Pizza">
+                <mat-icon matSuffix>password</mat-icon>
         </mat-form-field>
         <button 
             [disabled] = "!validaCampos()" 
